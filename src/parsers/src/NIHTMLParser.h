@@ -18,7 +18,19 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <libxml/HTMLparser.h>
+#import "NIHTMLElement.h"
 
-@interface NIHTMLParser : NSObject
+@interface NIHTMLParser : NSObject {
+  htmlDocPtr _doc;
+}
+
+-(id)initWithContentsOfURL:(NSURL*)url error:(NSError**)error;
+-(id)initWithData:(NSData*)data error:(NSError**)error;
+-(id)initWithString:(NSString*)string error:(NSError**)error;
+
+-(NIHTMLElement*)doc;
+-(NIHTMLElement*)body;
+-(NIHTMLElement*)html;
 
 @end

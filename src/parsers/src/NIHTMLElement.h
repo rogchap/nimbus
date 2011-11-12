@@ -23,9 +23,10 @@
 typedef enum {
   
   NIHTMLElementTypeUnknown,
-  NIHTMLElementTypeP,
-  NIHTMLElementTypeDiv,
-  NIHTMLElementTypeStrong
+  NIHTMLElementTypeParagraph,
+  NIHTMLElementTypeBold,
+  NIHTMLElementTypeItalic,
+  NIHTMLElementTypeLink
   
 } NIHTMLElementType;
 
@@ -101,7 +102,7 @@ typedef enum {
 // C functions for minor performance increase in tight loops
 NSString * getAttributeNamed(xmlNode * node, const char * nameStr);
 void setAttributeNamed(xmlNode * node, const char * nameStr, const char * value);
-NIHTMLElementType nodeType(xmlNode* node);
+NIHTMLElementType elementType(xmlNode* node);
 NSString * allNodeContents(xmlNode*node);
 NSString * rawContentsOfNode(xmlNode * node);
 

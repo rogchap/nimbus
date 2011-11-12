@@ -18,6 +18,7 @@
 //
 
 #import "NIHTMLElement.h"
+#import <libxml/HTMLtree.h>
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -111,7 +112,7 @@
 		}
     
 		[self findChildrenWithAttribute:attribute 
-                       matchingValue:matchingValue 
+                      matchingValue:matchingValue 
                           inXMLNode:cur_node->children 
                             inArray:array allowPartial:partial];
 	}	
@@ -121,7 +122,9 @@
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NIHTMLElement *)findChildOfClass:(NSString *)className {
-  NIHTMLElement* node = [self findChildWithAttribute:"class" matchingValue:[className UTF8String] inXMLNode:_node->children allowPartial:NO];
+  NIHTMLElement* node = [self findChildWithAttribute:"class" 
+                                       matchingValue:[className UTF8String] 
+                                           inXMLNode:_node->children allowPartial:NO];
   return node;
 }
 
@@ -175,13 +178,52 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr) {
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(NSArray *)findChildTags:(NSString *)tagName {
+-(void)findChildTags:(NSString*)tagName inXMLNode:(xmlNode *)node inArray:(NSMutableArray*)array {
+	xmlNode *cur_node = NULL;
+	const char * tagNameStr =  [tagName UTF8String];
   
+	if (tagNameStr == nil) {
+		return;
+  }
+  
+  for (cur_node = node; cur_node; cur_node = cur_node->next) {				
+		if (cur_node->name && strcmp((char*)cur_node->name, tagNameStr) == 0) {
+			NIHTMLElement* childNode = [[[NIHTMLElement alloc] initWithXMLNode:cur_node] autorelease];
+			[array addObject:childNode];
+		}
+    
+		[self findChildTags:tagName inXMLNode:cur_node->children inArray:array];
+	}	
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+-(NIHTMLElement*)findChildTag:(NSString*)tagName inXMLNode:(xmlNode *)node {
+	xmlNode *cur_node = NULL;
+	const char * tagNameStr =  [tagName UTF8String];
+  
+  for (cur_node = node; cur_node; cur_node = cur_node->next) {				
+		if (cur_node && cur_node->name && strcmp((char*)cur_node->name, tagNameStr) == 0) {
+			return [[[NIHTMLElement alloc] initWithXMLNode:cur_node] autorelease];
+		}
+    
+		NIHTMLElement * cNode = [self findChildTag:tagName inXMLNode:cur_node->children];
+		if (cNode != NULL) {
+			return cNode;
+		}
+	}	
+	return NULL;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+-(NSArray *)findChildTags:(NSString *)tagName {
+  NSMutableArray * array = [NSMutableArray array];
+	[self findChildTags:tagName inXMLNode:_node->children inArray:array];
+	return array;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NIHTMLElement *)findChildTag:(NSString *)tagName {
-  
+  return [self findChildTag:tagName inXMLNode:_node->children];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -191,27 +233,67 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NSString *)contents {
+  if (_node->children && _node->children->content) {
+		return [NSString stringWithCString:(void*)_node->children->content encoding:NSUTF8StringEncoding];
+	}
+	return nil;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+NSString * allNodeContents(xmlNode*node) {
+	if (node == NULL) {
+		return nil;
+  }
   
+	void * contents = xmlNodeGetContent(node);
+	if (contents)	{
+		NSString* string = [NSString stringWithCString:contents encoding:NSUTF8StringEncoding];
+		xmlFree(contents);
+		return string;
+	}
+	return @"";
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NSString *)allContents {
-  
+  return allNodeContents(_node);
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(NSString *)rawContents {
+NSString * rawContentsOfNode(xmlNode * node) {	
+	xmlBufferPtr buffer = xmlBufferCreateSize(1000);
+	xmlOutputBufferPtr buf = xmlOutputBufferCreateBuffer(buffer, NULL);
   
+	htmlNodeDumpOutput(buf, node->doc, node, (const char*)node->doc->encoding);
+  
+	xmlOutputBufferFlush(buf);
+  
+	NSString * string = nil;
+  
+	if (buffer->content) {
+		string = [[[NSString alloc] initWithBytes:(const void *)xmlBufferContent(buffer) length:xmlBufferLength(buffer) encoding:NSUTF8StringEncoding] autorelease];
+	}
+  
+	xmlOutputBufferClose(buf);
+	xmlBufferFree(buffer);
+  
+	return string;
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+-(NSString*)rawContents {
+	return rawContentsOfNode(_node);
+}
+
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NIHTMLElement *)nextSibling {
-  
+  return [[[NIHTMLElement alloc] initWithXMLNode:_node->next] autorelease];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NIHTMLElement *)previousSibling {
-  
+  return [[[NIHTMLElement alloc] initWithXMLNode:_node->prev] autorelease];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -226,17 +308,49 @@ NSString * getAttributeNamed(xmlNode * node, const char * nameStr) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NIHTMLElement *)parent {
-  
+  return [[[NIHTMLElement alloc] initWithXMLNode:_node->parent] autorelease];
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NSArray *)children {
+  xmlNode *cur_node = NULL;
+	NSMutableArray * array = [NSMutableArray array]; 
+  
+	for (cur_node = _node->children; cur_node; cur_node = cur_node->next) {	
+		NIHTMLElement * node = [[[NIHTMLElement alloc] initWithXMLNode:cur_node] autorelease];
+		[array addObject:node];
+	}
+	return array;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+NIHTMLElementType elementType(xmlNode * _node) {
+	if (_node == NULL || _node->name == NULL)
+		return NIHTMLElementTypeUnknown;
+  
+	const char * tagName = (const char*)_node->name;
+	if (strcmp(tagName, "p") == 0)
+		return NIHTMLElementTypeParagraph;
+  else if (strcmp(tagName, "div") == 0)
+		return NIHTMLElementTypeParagraph;
+	else if (strcmp(tagName, "b") == 0)
+		return NIHTMLElementTypeBold;
+	else if (strcmp(tagName, "strong") == 0)
+		return NIHTMLElementTypeBold;
+	else if (strcmp(tagName, "i") == 0)
+		return NIHTMLElementTypeItalic;
+  else if (strcmp(tagName, "em") == 0)
+		return NIHTMLElementTypeItalic;
+  else if (strcmp(tagName, "a") == 0)
+		return NIHTMLElementTypeLink;
+	else
+		return NIHTMLElementTypeUnknown;
   
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 -(NIHTMLElementType)elementType {
-  
+  return elementType(_node);
 }
 
 
