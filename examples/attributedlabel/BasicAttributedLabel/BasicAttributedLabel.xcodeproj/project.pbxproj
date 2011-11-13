@@ -47,6 +47,7 @@
 		DBC35663146E22330021A536 /* NIHTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC35660146E22330021A536 /* NIHTMLParser.m */; };
 		DBC35665146E23350021A536 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC35664146E23350021A536 /* libxml2.dylib */; };
 		DBC35667146F46B10021A536 /* HtmlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBC35666146F46B10021A536 /* HtmlView.xib */; };
+		DBC3566F146F5FA20021A536 /* NIHTMLElement+NSAttributedString.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC3566E146F5FA20021A536 /* NIHTMLElement+NSAttributedString.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -129,6 +130,8 @@
 		DBC35661146E22330021A536 /* NimbusParsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NimbusParsers.h; path = ../../../src/parsers/src/NimbusParsers.h; sourceTree = "<group>"; };
 		DBC35664146E23350021A536 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		DBC35666146F46B10021A536 /* HtmlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HtmlView.xib; path = resources/HtmlView.xib; sourceTree = "<group>"; };
+		DBC3566D146F5FA20021A536 /* NIHTMLElement+NSAttributedString.h */ = {isa = PBXFileReference; fileEncoding = 4; name = "NIHTMLElement+NSAttributedString.h"; path = "../../../src/parsers/src/NIHTMLElement+NSAttributedString.h"; sourceTree = "<group>"; };
+		DBC3566E146F5FA20021A536 /* NIHTMLElement+NSAttributedString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NIHTMLElement+NSAttributedString.m"; path = "../../../src/parsers/src/NIHTMLElement+NSAttributedString.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -327,6 +330,8 @@
 		DBC3565C146E220B0021A536 /* Parsers */ = {
 			isa = PBXGroup;
 			children = (
+				DBC3566D146F5FA20021A536 /* NIHTMLElement+NSAttributedString.h */,
+				DBC3566E146F5FA20021A536 /* NIHTMLElement+NSAttributedString.m */,
 				DBC3565D146E22330021A536 /* NIHTMLElement.h */,
 				DBC3565E146E22330021A536 /* NIHTMLElement.m */,
 				DBC3565F146E22330021A536 /* NIHTMLParser.h */,
@@ -432,6 +437,7 @@
 				DBC3565B146E20050021A536 /* HtmlViewController.m in Sources */,
 				DBC35662146E22330021A536 /* NIHTMLElement.m in Sources */,
 				DBC35663146E22330021A536 /* NIHTMLParser.m in Sources */,
+				DBC3566F146F5FA20021A536 /* NIHTMLElement+NSAttributedString.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -23,9 +23,11 @@
 typedef enum {
   
   NIHTMLElementTypeUnknown,
+  NIHTMLElementTypeText,
   NIHTMLElementTypeParagraph,
   NIHTMLElementTypeBold,
   NIHTMLElementTypeItalic,
+  NIHTMLElementTypeUnderline,
   NIHTMLElementTypeLink
   
 } NIHTMLElementType;

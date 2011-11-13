@@ -343,6 +343,10 @@ NIHTMLElementType elementType(xmlNode * _node) {
 		return NIHTMLElementTypeItalic;
   else if (strcmp(tagName, "a") == 0)
 		return NIHTMLElementTypeLink;
+  else if (strcmp(tagName, "u") == 0)
+		return NIHTMLElementTypeUnderline;
+  else if (strcmp(tagName, "text") == 0)
+		return NIHTMLElementTypeText;
 	else
 		return NIHTMLElementTypeUnknown;
   

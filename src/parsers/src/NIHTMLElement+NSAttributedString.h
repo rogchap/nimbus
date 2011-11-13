@@ -1,6 +1,9 @@
 //
 // Copyright 2011 Roger Chapman
 //
+// Forked from Objective-C-HMTL-Parser October 19, 2011 - Copyright 2010 Ben Reeves
+//    https://github.com/zootreeves/Objective-C-HMTL-Parser
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -14,8 +17,10 @@
 // limitations under the License.
 //
 
-#import "NIHTMLParser.h"
 #import "NIHTMLElement.h"
-#import "NIHTMLElement+NSAttributedString.h"
 
+@interface NIHTMLElement (NSAttributedString)
 
+-(NSAttributedString*) attributedString;
+
+@end

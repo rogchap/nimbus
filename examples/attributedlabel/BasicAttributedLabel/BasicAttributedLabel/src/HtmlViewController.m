@@ -38,10 +38,11 @@
   
   self.title = @"HTML to Attributed Label";
   
-  NSString *html = @"<p>This is some text with a <b>Bold</b> bit of text</p><p>Second Paragraph with <i>italic and <u>underlined</u></i></p><p>Lets add in a <a href=\"www.google.com\">link</a> for good messure</p>";
+  NSString *html = @"<p>This is some text with a <b>Bold</b> bit of text</p><p>Second Paragraph\
+ with <i>italic and <u>underlined</u></i></p><p>Lets add in a <a href=\"www.google.com\">link</a>\
+ for good messure</p>";
   
   NIHTMLParser *parser = [[NIHTMLParser alloc] initWithString:html];
-  
   NSAttributedString* attrString = [parser.body attributedString];
     
   htmlLabel.attributedString = attrString;
