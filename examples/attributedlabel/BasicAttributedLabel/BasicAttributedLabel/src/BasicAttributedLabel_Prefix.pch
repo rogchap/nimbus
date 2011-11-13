@@ -21,4 +21,5 @@
 #import "NimbusCore.h"
 #import "NimbusModels.h"
 #import "NimbusAttributedLabel.h"
+#import "NimbusParsers.h"
 #endif

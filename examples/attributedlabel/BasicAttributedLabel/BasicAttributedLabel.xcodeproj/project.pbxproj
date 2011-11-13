@@ -42,6 +42,11 @@
 		DB6A04E21403F1890020F7FD /* MashupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6A04E11403F1890020F7FD /* MashupViewController.m */; };
 		DB6A04E61403F2780020F7FD /* MashupView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DB6A04E51403F2780020F7FD /* MashupView.xib */; };
 		DB6AADFA1407A82F0003CB63 /* NSAttributedString+NimbusAttributedLabel.m in Sources */ = {isa = PBXBuildFile; fileRef = DB6AADF91407A82F0003CB63 /* NSAttributedString+NimbusAttributedLabel.m */; };
+		DBC3565B146E20050021A536 /* HtmlViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC3565A146E20050021A536 /* HtmlViewController.m */; };
+		DBC35662146E22330021A536 /* NIHTMLElement.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC3565E146E22330021A536 /* NIHTMLElement.m */; };
+		DBC35663146E22330021A536 /* NIHTMLParser.m in Sources */ = {isa = PBXBuildFile; fileRef = DBC35660146E22330021A536 /* NIHTMLParser.m */; };
+		DBC35665146E23350021A536 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DBC35664146E23350021A536 /* libxml2.dylib */; };
+		DBC35667146F46B10021A536 /* HtmlView.xib in Resources */ = {isa = PBXBuildFile; fileRef = DBC35666146F46B10021A536 /* HtmlView.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -115,6 +120,15 @@
 		DB6A04E51403F2780020F7FD /* MashupView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MashupView.xib; path = resources/MashupView.xib; sourceTree = "<group>"; };
 		DB6AADF81407A82F0003CB63 /* NSAttributedString+NimbusAttributedLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSAttributedString+NimbusAttributedLabel.h"; path = "../../../src/attributedlabel/src/NSAttributedString+NimbusAttributedLabel.h"; sourceTree = "<group>"; };
 		DB6AADF91407A82F0003CB63 /* NSAttributedString+NimbusAttributedLabel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSAttributedString+NimbusAttributedLabel.m"; path = "../../../src/attributedlabel/src/NSAttributedString+NimbusAttributedLabel.m"; sourceTree = "<group>"; };
+		DBC35659146E20050021A536 /* HtmlViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HtmlViewController.h; path = src/HtmlViewController.h; sourceTree = "<group>"; };
+		DBC3565A146E20050021A536 /* HtmlViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HtmlViewController.m; path = src/HtmlViewController.m; sourceTree = "<group>"; };
+		DBC3565D146E22330021A536 /* NIHTMLElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIHTMLElement.h; path = ../../../src/parsers/src/NIHTMLElement.h; sourceTree = "<group>"; };
+		DBC3565E146E22330021A536 /* NIHTMLElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIHTMLElement.m; path = ../../../src/parsers/src/NIHTMLElement.m; sourceTree = "<group>"; };
+		DBC3565F146E22330021A536 /* NIHTMLParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NIHTMLParser.h; path = ../../../src/parsers/src/NIHTMLParser.h; sourceTree = "<group>"; };
+		DBC35660146E22330021A536 /* NIHTMLParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = NIHTMLParser.m; path = ../../../src/parsers/src/NIHTMLParser.m; sourceTree = "<group>"; };
+		DBC35661146E22330021A536 /* NimbusParsers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = NimbusParsers.h; path = ../../../src/parsers/src/NimbusParsers.h; sourceTree = "<group>"; };
+		DBC35664146E23350021A536 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		DBC35666146F46B10021A536 /* HtmlView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = HtmlView.xib; path = resources/HtmlView.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,6 +136,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DBC35665146E23350021A536 /* libxml2.dylib in Frameworks */,
 				DB6A04DF1403F0BC0020F7FD /* CoreText.framework in Frameworks */,
 				DB6A04871403F02D0020F7FD /* UIKit.framework in Frameworks */,
 				DB6A04891403F02D0020F7FD /* Foundation.framework in Frameworks */,
@@ -176,6 +191,7 @@
 		DB6A04851403F02D0020F7FD /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				DBC35664146E23350021A536 /* libxml2.dylib */,
 				DB6A04DE1403F0BC0020F7FD /* CoreText.framework */,
 				DB6A04861403F02D0020F7FD /* UIKit.framework */,
 				DB6A04881403F02D0020F7FD /* Foundation.framework */,
@@ -218,6 +234,7 @@
 		DB6A04A01403F0580020F7FD /* Nimbus */ = {
 			isa = PBXGroup;
 			children = (
+				DBC3565C146E220B0021A536 /* Parsers */,
 				DB1867661407F010002DEA82 /* Models */,
 				DB6A04A21403F0740020F7FD /* Attributed Label */,
 				DB6A04A11403F06D0020F7FD /* Core */,
@@ -291,6 +308,8 @@
 				DB530FDC1407EE7900BCB9E7 /* RootViewController.m */,
 				DB1867751407FB0A002DEA82 /* UnderlineViewController.h */,
 				DB1867761407FB0A002DEA82 /* UnderlineViewController.m */,
+				DBC35659146E20050021A536 /* HtmlViewController.h */,
+				DBC3565A146E20050021A536 /* HtmlViewController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -300,8 +319,21 @@
 			children = (
 				DB6A04E51403F2780020F7FD /* MashupView.xib */,
 				DB1867781407FB9F002DEA82 /* UnderlineView.xib */,
+				DBC35666146F46B10021A536 /* HtmlView.xib */,
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		DBC3565C146E220B0021A536 /* Parsers */ = {
+			isa = PBXGroup;
+			children = (
+				DBC3565D146E22330021A536 /* NIHTMLElement.h */,
+				DBC3565E146E22330021A536 /* NIHTMLElement.m */,
+				DBC3565F146E22330021A536 /* NIHTMLParser.h */,
+				DBC35660146E22330021A536 /* NIHTMLParser.m */,
+				DBC35661146E22330021A536 /* NimbusParsers.h */,
+			);
+			name = Parsers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -330,6 +362,7 @@
 		DB6A04791403F02D0020F7FD /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				LastUpgradeCheck = 0420;
 				ORGANIZATIONNAME = "Storm ID Ltd";
 			};
 			buildConfigurationList = DB6A047C1403F02D0020F7FD /* Build configuration list for PBXProject "BasicAttributedLabel" */;
@@ -357,6 +390,7 @@
 				DB6A048E1403F02D0020F7FD /* BasicAttributedLabel_Prefix.pch in Resources */,
 				DB6A04E61403F2780020F7FD /* MashupView.xib in Resources */,
 				DB1867791407FB9F002DEA82 /* UnderlineView.xib in Resources */,
+				DBC35667146F46B10021A536 /* HtmlView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +429,9 @@
 				DB1867701407F02C002DEA82 /* NITableViewModel.m in Sources */,
 				DB1867741407F0F7002DEA82 /* LabelEntry.m in Sources */,
 				DB1867771407FB0A002DEA82 /* UnderlineViewController.m in Sources */,
+				DBC3565B146E20050021A536 /* HtmlViewController.m in Sources */,
+				DBC35662146E22330021A536 /* NIHTMLElement.m in Sources */,
+				DBC35663146E22330021A536 /* NIHTMLParser.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -443,6 +480,8 @@
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BasicAttributedLabel/src/BasicAttributedLabel_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BasicAttributedLabel/resources/BasicAttributedLabel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -456,6 +495,8 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = BasicAttributedLabel/src/BasicAttributedLabel_Prefix.pch;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = /usr/include/libxml2;
 				INFOPLIST_FILE = "BasicAttributedLabel/resources/BasicAttributedLabel-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				VALIDATE_PRODUCT = YES;

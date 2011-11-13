@@ -19,6 +19,7 @@
 #import "LabelEntry.h"
 #import "MashupViewController.h"
 #import "UnderlineViewController.h"
+#import "HtmlViewController.h"
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -46,7 +47,8 @@
    @"",
    [LabelEntry entryWithTitle:@"Mashup" controllerClass:[MashupViewController class]], 
    @"",
-   [LabelEntry entryWithTitle:@"Underline" controllerClass:[UnderlineViewController class]], nil];
+   [LabelEntry entryWithTitle:@"Underline" controllerClass:[UnderlineViewController class]],
+   [LabelEntry entryWithTitle:@"HTML" controllerClass:[HtmlViewController class]], nil];
   
   _model = [[NITableViewModel alloc] initWithSectionedArray:tableContents
                                                    delegate:(id)[NICellFactory class]];

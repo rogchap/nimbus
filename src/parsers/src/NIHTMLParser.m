@@ -25,7 +25,7 @@
 @implementation NIHTMLParser
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(id)initWithString:(NSString*)string error:(NSError**)error { 
+-(id)initWithString:(NSString*)string { 
 	if (self = [super init]) {
 		_doc = nil;
     
@@ -39,17 +39,12 @@
 			optionsHtml = optionsHtml | HTML_PARSE_NOWARNING;
 			_doc = htmlReadDoc ((xmlChar*)[string UTF8String], NULL, enc, optionsHtml);
 		}
-		else {
-			if (error) {
-				*error = [NSError errorWithDomain:@"HTMLParserdomain" code:1 userInfo:nil];
-			}
-		}
 	}
 	return self;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(id)initWithData:(NSData*)data error:(NSError**)error {
+-(id)initWithData:(NSData*)data {
 	if (self = [super init]) {
 		_doc = nil;
     
@@ -62,29 +57,23 @@
                          enc,
                          XML_PARSE_NOERROR | XML_PARSE_NOWARNING);
 		}
-		else {
-			if (error) {
-				*error = [NSError errorWithDomain:@"HTMLParserdomain" code:1 userInfo:nil];
-			}
-		}
 	}
 	return self;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
--(id)initWithContentsOfURL:(NSURL*)url error:(NSError**)error {
+-(id)initWithContentsOfURL:(NSURL*)url {
   
+  NSError** error;
 	NSData * _data = [[NSData alloc] initWithContentsOfURL:url options:0 error:error];
   
-	if (_data == nil || error)
-	{
-		[_data release];
+	if (_data == nil || error) {
+		NI_RELEASE_SAFELY(_data);
 		return nil;
 	}
   
-	[self initWithData:_data error:error];
-  
-	[_data release];
+	[self initWithData:_data];
+	NI_RELEASE_SAFELY(_data);
   
 	return self;
 }

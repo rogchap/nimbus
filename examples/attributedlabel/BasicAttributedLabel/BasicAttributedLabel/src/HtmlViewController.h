@@ -1,9 +1,6 @@
 //
 // Copyright 2011 Roger Chapman
 //
-// Forked from Objective-C-HMTL-Parser October 19, 2011 - Copyright 2010 Ben Reeves
-//    https://github.com/zootreeves/Objective-C-HMTL-Parser
-//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
 // You may obtain a copy of the License at
@@ -17,20 +14,8 @@
 // limitations under the License.
 //
 
-#import <Foundation/Foundation.h>
-#import <libxml/HTMLparser.h>
-#import "NIHTMLElement.h"
+@interface HtmlViewController : UIViewController
 
-@interface NIHTMLParser : NSObject {
-  htmlDocPtr _doc;
-}
-
--(id)initWithContentsOfURL:(NSURL*)url;
--(id)initWithData:(NSData*)data;
--(id)initWithString:(NSString*)string;
-
--(NIHTMLElement*)doc;
--(NIHTMLElement*)body;
--(NIHTMLElement*)html;
+@property (retain, nonatomic) IBOutlet NIAttributedLabel *htmlLabel;
 
 @end
